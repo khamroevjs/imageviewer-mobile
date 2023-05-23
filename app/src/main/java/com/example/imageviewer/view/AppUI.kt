@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import com.example.imageviewer.model.AppState
 import com.example.imageviewer.model.ScreenType
 import com.example.imageviewer.model.ContentState

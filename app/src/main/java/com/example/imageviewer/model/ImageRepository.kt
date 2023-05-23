@@ -1,23 +1,9 @@
-// READ ME FIRST!
-//
-// Code in this file is shared between the Android and Desktop JVM targets.
-// Kotlin's hierarchical multiplatform projects currently
-// don't support sharing code depending on JVM declarations.
-//
-// You can follow the progress for HMPP JVM & Android intermediate source sets here:
-// https://youtrack.jetbrains.com/issue/KT-42466
-//
-// The workaround used here to access JVM libraries causes IntelliJ IDEA to not
-// resolve symbols in this file properly.
-//
-// Resolution errors in your IDE do not indicate a problem with your setup.
-
-
 package com.example.imageviewer.model
 
 import com.example.imageviewer.core.Repository
 import com.example.imageviewer.utils.ktorHttpClient
 import com.example.imageviewer.utils.runBlocking
+import io.ktor.client.call.body
 import io.ktor.client.request.*
 
 class ImageRepository(
@@ -26,8 +12,8 @@ class ImageRepository(
 
     override fun get(): MutableList<String> {
         return runBlocking {
-            val content = ktorHttpClient.get<String>(httpsURL)
-            content.lines().toMutableList()
+            val content = ktorHttpClient.get(httpsURL)
+            content.body<String>().lines().toMutableList()
         }
     }
 }

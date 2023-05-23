@@ -1,17 +1,15 @@
 package com.example.imageviewer.view
 
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.pointerInput
 import com.example.imageviewer.core.EventLocker
 import com.example.imageviewer.style.Transparent
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Draggable(
     dragHandler: DragHandler,

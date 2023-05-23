@@ -14,12 +14,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,20 +68,26 @@ fun TopContent(content: ContentState) {
     Spacer(modifier = Modifier.height(5.dp))
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TitleBar(text: String, content: ContentState) {
     TopAppBar(
-        backgroundColor = DarkGreen,
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = DarkGreen),
+//        backgroundColor = DarkGreen,
         title = {
             Row(Modifier.height(50.dp)) {
                 Text(
                     text,
                     color = Foreground,
-                    modifier = Modifier.weight(1f).align(Alignment.CenterVertically)
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
                 )
                 Surface(
                     color = Transparent,
-                    modifier = Modifier.padding(end = 20.dp).align(Alignment.CenterVertically),
+                    modifier = Modifier
+                        .padding(end = 20.dp)
+                        .align(Alignment.CenterVertically),
                     shape = CircleShape
                 ) {
                     Clickable(
@@ -105,10 +114,12 @@ fun PreviewImage(content: ContentState) {
         AppState.screenState(ScreenType.FullscreenImage)
     }) {
         Card(
-            backgroundColor = DarkGray,
+            colors = CardDefaults.cardColors(containerColor = DarkGray),
+//            backgroundColor = DarkGray,
             modifier = Modifier.height(250.dp),
             shape = RectangleShape,
-            elevation = 1.dp
+            elevation = CardDefaults.cardElevation(1.dp),
+//            elevation = 1.dp
         ) {
             Image(
                 if (content.isMainImageEmpty()) {
@@ -118,7 +129,8 @@ fun PreviewImage(content: ContentState) {
                 },
                 contentDescription = null,
                 modifier = Modifier
-                    .fillMaxWidth().padding(start = 1.dp, top = 1.dp, end = 1.dp, bottom = 5.dp),
+                    .fillMaxWidth()
+                    .padding(start = 1.dp, top = 1.dp, end = 1.dp, bottom = 5.dp),
                 contentScale = ContentScale.Fit
             )
         }
@@ -131,14 +143,18 @@ fun Miniature(
     content: ContentState
 ) {
     Card(
-        backgroundColor = MiniatureColor,
-        modifier = Modifier.padding(start = 10.dp, end = 10.dp).height(70.dp)
+        colors = CardDefaults.cardColors(containerColor = MiniatureColor),
+//        backgroundColor = MiniatureColor,
+        modifier = Modifier
+            .padding(start = 10.dp, end = 10.dp)
+            .height(70.dp)
             .fillMaxWidth()
             .clickable {
                 content.setMainImage(picture)
             },
         shape = RectangleShape,
-        elevation = 2.dp
+        elevation = CardDefaults.cardElevation(2.dp),
+//        elevation = 2.dp
     ) {
         Row(modifier = Modifier.padding(end = 30.dp)) {
             Clickable(
@@ -149,7 +165,8 @@ fun Miniature(
                 Image(
                     picture.image.asImageBitmap(),
                     contentDescription = null,
-                    modifier = Modifier.height(70.dp)
+                    modifier = Modifier
+                        .height(70.dp)
                         .width(90.dp)
                         .padding(start = 1.dp, top = 1.dp, end = 1.dp, bottom = 1.dp),
                     contentScale = ContentScale.Crop
@@ -158,12 +175,16 @@ fun Miniature(
             Text(
                 text = picture.name,
                 color = Foreground,
-                modifier = Modifier.weight(1f).align(Alignment.CenterVertically).padding(start = 16.dp),
-                style = MaterialTheme.typography.body1
+                modifier = Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically)
+                    .padding(start = 16.dp),
+                style = MaterialTheme.typography.bodyLarge
             )
 
             Clickable(
-                modifier = Modifier.height(70.dp)
+                modifier = Modifier
+                    .height(70.dp)
                     .width(30.dp),
                 onClick = {
                     showPopUpMessage(
@@ -171,7 +192,7 @@ fun Miniature(
                                 "${picture.name} \n" +
                                 "${content.getString(R.string.size)} " +
                                 "${picture.width}x${picture.height} " +
-                                "${content.getString(R.string.pixels)}",
+                                content.getString(R.string.pixels),
                         content.getContext()
                     )
                 }
@@ -179,7 +200,8 @@ fun Miniature(
                 Image(
                     icDots(),
                     contentDescription = null,
-                    modifier = Modifier.height(70.dp)
+                    modifier = Modifier
+                        .height(70.dp)
                         .width(30.dp)
                         .padding(start = 1.dp, top = 25.dp, end = 1.dp, bottom = 25.dp),
                     contentScale = ContentScale.FillHeight

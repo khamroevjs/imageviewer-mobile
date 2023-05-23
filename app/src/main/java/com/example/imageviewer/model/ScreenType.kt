@@ -8,10 +8,7 @@ enum class ScreenType {
 }
 
 object AppState {
-    private var screen: MutableState<ScreenType>
-    init {
-        screen = mutableStateOf(ScreenType.MainScreen)
-    }
+    private var screen: MutableState<ScreenType> = mutableStateOf(ScreenType.MainScreen)
 
     fun screenState() : ScreenType {
         return screen.value

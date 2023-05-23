@@ -10,7 +10,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
-val cacheImagePostfix = "info"
+const val cacheImagePostfix = "info"
 
 fun cacheImage(path: String, picture: Picture) {
     try {

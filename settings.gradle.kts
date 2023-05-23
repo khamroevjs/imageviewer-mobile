@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Image Viewer"
-include ':app'
+rootProject.name = "Stopwatch"
+include(":app")
